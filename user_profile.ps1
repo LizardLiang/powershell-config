@@ -28,7 +28,12 @@ Import-Module ZLocation
 Set-Alias vim nvim
 Set-Alias ll ls
 Set-Alias g git
+<<<<<<< HEAD
 Set-Alias gcz 'C:\Program Files\Git\cmd\git.exe cz'
+=======
+Set-Alias st 'git status'
+Set-Alias gcz 'git cz'
+>>>>>>> dee5b733925eeed116fabce2c47f4ff73f36860b
 Set-Alias grep findstr
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
