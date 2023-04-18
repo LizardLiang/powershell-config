@@ -40,7 +40,7 @@ Set-Alias -Name glg -Value git-log-graph
 function git-diff { git diff }
 Set-Alias -Name gd -Value git-diff
 
-function git-checkout { git checkout }
+function git-checkout { git checkout $args }
 Set-Alias -Name gco -Value git-checkout
 
 function git-fetch { git fetch }
