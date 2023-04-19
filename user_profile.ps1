@@ -28,17 +28,13 @@ Import-Module ZLocation
 Set-Alias vim nvim
 Set-Alias ll ls
 Set-Alias g git
-<<<<<<< HEAD
 Set-Alias gcz 'C:\Program Files\Git\cmd\git.exe cz'
-=======
-Set-Alias st 'git status'
-Set-Alias gcz 'git cz'
->>>>>>> dee5b733925eeed116fabce2c47f4ff73f36860b
 Set-Alias grep findstr
 Set-Alias tig 'C:\Program Files\Git\usr\bin\tig.exe'
 Set-Alias less 'C:\Program Files\Git\usr\bin\less.exe'
 Set-Alias cc 'Set-Clipboard'
 
+# Git alias
 function git-log-graph  { g log --graph --decorate --oneline }
 Set-Alias -Name glg -Value git-log-graph
 
@@ -58,18 +54,20 @@ del alias:gp -Force
 function git-push { git push $args }
 Set-Alias -Name gp -Value git-push
 
-function git-branch { git branch }
+function git-branch { git branch $args }
 Set-Alias -Name gb -Value git-branch
 
 function git-status { git status }
 Set-Alias -Name gs -Value git-status
 
 del alias:gc -Force
-function git-commit { git commit }
+function git-commit { git commit $args }
 Set-Alias -Name gc -Value git-commit
 
 function back-dir { cd .. }
 Set-Alias -Name .. -Value back-dir
+
+Set-Alias -Name lg -Value lazygit
 
 # Utilities
 function which ($command) {
