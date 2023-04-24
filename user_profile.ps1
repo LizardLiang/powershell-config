@@ -26,6 +26,7 @@ Import-Module ZLocation
 
 # Alias
 Set-Alias vim nvim
+Set-Alias v vim
 Set-Alias ll ls
 Set-Alias g git
 Set-Alias gcz 'C:\Program Files\Git\cmd\git.exe cz'
