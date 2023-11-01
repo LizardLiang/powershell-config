@@ -1,6 +1,6 @@
 # Prompt
 Import-Module posh-git
-oh-my-posh init pwsh --config "$(scoop prefix oh-my-posh)\themes\slimfat.omp.json"  | Invoke-Expression
+oh-my-posh init pwsh --config "C:\Program Files (x86)\oh-my-posh\themes\slimfat.omp.json"  | Invoke-Expression
 
 # Load prompt setting
 #function Get-ScriptDirectory { Split-Path $MyInvocation.ScriptName }
@@ -75,3 +75,13 @@ function which ($command) {
   Get-Command -Name $command -ErrorAction SilentlyContinue |
     Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
+
+function cr () {
+  Get-ChildItem -Recurse | ForEach-Object {
+    if ($_ -is [System.IO.FileInfo]) {
+      (Get-Content $_.FullName) -replace '\r\n', '\r' | Set-Content -NoNewLine $_.FullName
+    }
+  }
+}
+
+
