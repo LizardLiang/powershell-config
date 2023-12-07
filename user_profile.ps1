@@ -1,6 +1,6 @@
 # Prompt
 Import-Module posh-git
-oh-my-posh init pwsh --config "C:\Program Files (x86)\oh-my-posh\themes\slimfat.omp.json"  | Invoke-Expression
+oh-my-posh init pwsh --config "${HOME}\.config\powershell\lizard.omg.json"  | Invoke-Expression
 
 # Load prompt setting
 #function Get-ScriptDirectory { Split-Path $MyInvocation.ScriptName }
@@ -27,7 +27,20 @@ Import-Module ZLocation
 # Alias
 Set-Alias vim nvim
 Set-Alias v vim
+
+function ls-less {
+  Get-ChildItem $args | less -r
+}
+
+Set-Alias -Name ls -Value ls-less
+
 Set-Alias ll ls
+
+function ls-force {
+    Get-ChildItem -Force $args | less -r
+}
+Set-Alias -Name la -Value ls-force 
+
 Set-Alias g git
 Set-Alias gcz 'C:\Program Files\Git\cmd\git.exe cz'
 Set-Alias grep findstr
@@ -76,12 +89,30 @@ function which ($command) {
     Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
 
-function cr () {
-  Get-ChildItem -Recurse | ForEach-Object {
-    if ($_ -is [System.IO.FileInfo]) {
-      (Get-Content $_.FullName) -replace '\r\n', '\r' | Set-Content -NoNewLine $_.FullName
+# To keep track of the last directory
+function Change-Directory {
+    param(
+        [string]$Path
+    )
+
+    $global:LastDirectory = if (-not $global:LastDirectory) { Get-Location } else { $global:LastDirectory }
+
+    if ($Path -eq '-') {
+        $temp = Get-Location
+        Set-Location $global:LastDirectory
+        $global:LastDirectory = $temp
     }
-  }
+    else {
+        $global:LastDirectory = Get-Location
+        Set-Location $Path
+    }
 }
 
+del alias:cd -Force
+Set-Alias -Name cd -Value z
 
+function copy-path() {
+    (Get-Location).Path | Set-Clipboard
+}
+
+Set-Alias -Name cppath -Value copy-path
